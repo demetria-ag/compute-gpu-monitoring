@@ -1,0 +1,19 @@
+# Installing packages in a separate image
+FROM nvcr.io/nvidia/deepstream:5.1-21.02-base as pkg-build
+
+RUN rm /etc/apt/sources.list.d/cuda.list # https://demetria.atlassian.net/browse/VISION-495
+
+RUN apt-get update && apt-get install -y \
+    python3.8 \
+    python3-pip \
+    python3-distutils \
+    python3-setuptools
+RUN python3.8 -m pip install pip --upgrade pip
+
+WORKDIR /root
+COPY requirements.txt requirements.txt
+COPY src/main.py main.py
+
+RUN pip install -r requirements.txt
+
+CMD python3.8 main.py
