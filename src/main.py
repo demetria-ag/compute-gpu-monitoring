@@ -24,10 +24,8 @@ import subprocess
 import sys
 import time
 import typing
-from collections import defaultdict
-
 import requests
-from google.api_core.exceptions import InternalServerError
+from collections import defaultdict
 from google.cloud import monitoring_v3
 
 METADATA_URL = "http://metadata.google.internal/computeMetadata/v1/instance/"
