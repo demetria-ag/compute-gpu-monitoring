@@ -1,0 +1,9 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-f', 'Dockerfile-$PROJECT_ID', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/utils/compute-gpu-monitoring:$SHORT_SHA', '-t',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/utils/compute-gpu-monitoring:latest', '.','--build-arg','DOCKER_REPO=us-central1-docker.pkg.dev/$PROJECT_ID/utils' ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/utils/compute-gpu-monitoring:$SHORT_SHA']
+
+images: ['us-central1-docker.pkg.dev/$PROJECT_ID/utils/compute-gpu-monitoring:$SHORT_SHA', 'us-central1-docker.pkg.dev/$PROJECT_ID/utils/compute-gpu-monitoring:latest']
